@@ -58,11 +58,9 @@ export const deleteUser = async (req, res) => {
     try {
       const user = await UserModel.findByIdAndDelete(id);
 
-      if (user) {
-        res.status(200).json("User deleted successfully");
-      } else {
-        res.status(404).json("No such user exists");
-      }
+      user
+        ? res.status(200).json("User deleted successfully")
+        : res.status(404).json("No such user exists");
     } catch (error) {
       res.status(500).json(error);
     }
